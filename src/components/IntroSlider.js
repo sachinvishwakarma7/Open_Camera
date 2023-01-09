@@ -1,8 +1,8 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
-const IntroSlider = () => {
+const IntroSlider = ({navigation}) => {
   const slides = [
     {
       key: 1,
@@ -54,6 +54,7 @@ const IntroSlider = () => {
     <AppIntroSlider
       showSkipButton={true}
       data={slides}
+      onDone={() => navigation.navigate('Home')}
       renderItem={_renderItem}
     />
   );
