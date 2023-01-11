@@ -1,32 +1,52 @@
-import {View, Text, Modal, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  TouchableWithoutFeedback,
+  StyleSheet,
+} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
-import {myColor} from '../utility/AppStyles';
 import {Dimensions} from 'react-native';
+import {fontFamily, myColor} from '../utility/AppStyles';
 
 const modalHeight = Dimensions.get('screen').height;
 
 const CustomModal = ({
   modalVisible,
+  onRequestClose,
   title_1,
   title_2,
-  onPress_1,
+  onClose,
+  overlayClose,
   onPress_2,
   messageText,
   iconComponent,
+  btnColor,
+  iconBgColor,
 }) => {
   return (
-    <Modal visible={modalVisible} animationType="fade" transparent={true}>
+    <Modal
+      visible={modalVisible}
+      animationType="fade"
+      transparent={true}
+      onRequestClose={onRequestClose}>
+      <TouchableWithoutFeedback onPress={overlayClose}>
+        <View style={styles.modalOverlay}></View>
+      </TouchableWithoutFeedback>
       <View style={styles.modalContainer}>
-        <View style={styles.modalIconContainer}>{iconComponent}</View>
+        <View
+          style={[styles.modalIconContainer, {backgroundColor: iconBgColor}]}>
+          {iconComponent}
+        </View>
         <View style={styles.modalMessageView}>
           <Text style={styles.modalMessageText}>{messageText}</Text>
         </View>
         <View style={styles.modalBtnContainer}>
           <View style={styles.modalTextContainer}>
             <CustomButton
-              onPress={onPress_1}
-              borderColor={myColor.secondryColor}
+              onPress={onClose}
+              borderColor={btnColor}
               borderRadius={8}
               borderWidth={1}
               title={title_1}
@@ -42,9 +62,9 @@ const CustomModal = ({
               title={title_2}
               width={120}
               height={60}
-              backgroundColor={myColor.secondryColor}
+              backgroundColor={btnColor}
               fontWeight={'bold'}
-              color={'white'}
+              color={myColor.white}
             />
           </View>
         </View>
@@ -61,13 +81,23 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingBottom: 40,
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: myColor.white,
     height: 250,
-    width: 300,
+    width: 330,
     borderRadius: 14,
+  },
+  modalOverlay: {
+    zIndex: -1,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalBtnContainer: {
     position: 'absolute',
+    paddingHorizontal: 20,
     bottom: 10,
     right: 0,
     left: 0,
@@ -81,23 +111,23 @@ const styles = StyleSheet.create({
   modalMessageView: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 50,
   },
   modalMessageText: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 26,
     textAlign: 'center',
-    color: 'black',
+    color: myColor.black,
+    fontFamily: fontFamily.SatoshiBold,
   },
   modalIconContainer: {
     zIndex: 1,
     borderWidth: 6,
-    borderColor: 'white',
+    borderColor: myColor.white,
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
     top: -50,
-    backgroundColor: '#F6E3E8',
     height: 100,
     width: 100,
     borderRadius: 50,

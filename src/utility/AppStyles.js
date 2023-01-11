@@ -1,24 +1,29 @@
-import {StyleSheet} from 'react-native';
-
 export const myColor = {
   //#blue
   primaryColor: '#479DC2',
 
+  //#Light_blue
+  primarySubColor: '#B5D8E7',
+
   //#Brown
   secondryColor: '#862B42',
 
-  //#GunMatel
+  //#Light_Brown
+  secondrySubColor: '#F6E3E8',
+
+  //#Gun_Matel
   bgColor: '#060F13',
+
+  //White_Color
+  white: '#fff',
+
+  //Black_Color
+  black: '#000',
 };
 
-export const commonStyle = StyleSheet.create({
-  bgColor_DarkGray: {
-    backgroundColor: '#479DC2',
-  },
-  fontColor_White: {
-    color: 'white',
-  },
-  fontColor_Gray: {
-    color: 'gray',
-  },
-});
+export const fontFamily = {
+  SatoshiRegular: 'Satoshi-Regular',
+  SaSatoshiMedium: 'Satoshi-Medium',
+  SatoshiBold: 'Satoshi-Bold',
+  SatoshiBlack: 'Satoshi-Black',
+};

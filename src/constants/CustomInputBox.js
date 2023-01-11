@@ -1,5 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {fontFamily, myColor} from '../utility/AppStyles';
+// import {fontFamily} from '../assets/font/AppFontIndex';
 
 const CustomInputBox = ({iconComp, title, onPress}) => {
   return (
@@ -26,8 +28,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   titleText: {
-    color: 'white',
-    fontWeight: 'bold',
+    fontFamily: fontFamily.SatoshiBold,
+    color: myColor.white,
     paddingLeft: 10,
   },
 });

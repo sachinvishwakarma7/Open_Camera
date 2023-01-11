@@ -54,7 +54,7 @@ const IntroSlider = ({navigation}) => {
     <AppIntroSlider
       showSkipButton={true}
       data={slides}
-      onDone={() => navigation.navigate('Home')}
+      onDone={() => navigation.navigate('Settings')}
       renderItem={_renderItem}
     />
   );

@@ -7,13 +7,33 @@ import PrivacyPolicyIcon from '../assets/images/svg/PrivacyPolicyIcon';
 import HelpIcon from '../assets/images/svg/HelpIcon';
 import AboutIcon from '../assets/images/svg/AboutIcon';
 import RestorePurchaseIcon from '../assets/images/svg/RestorePurchaseIcon';
-import {myColor} from '../utility/AppStyles';
-import {AppFontIndex, myFont} from '../assets/font/AppFontIndex';
+import {fontFamily, myColor} from '../utility/AppStyles';
 import CustomButton from '../constants/CustomButton';
 import CustomModal from '../constants/CustomModal';
+import CustomLoginAccoutModal from '../constants/CustomLoginAccoutModal';
 
 const SettingScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    password: '',
+  });
+  const getValue = (value, name) => {
+    console.log('SettingScreen', value, name);
+    if (name == 'email') {
+      setUserInfo({
+        ...userInfo,
+        email: value,
+      });
+    } else if (name == 'password') {
+      setUserInfo({
+        ...userInfo,
+        password: value,
+      });
+    }
+  };
+  console.log('SettingScreen', userInfo);
   return (
     <View style={styles.container}>
       {/* <View style={styles.glow} /> */}
@@ -22,15 +42,14 @@ const SettingScreen = () => {
           <Text style={[styles.loginText, styles.textcolorWhite]}>
             Logged in as:
           </Text>
-
-          <Text style={[styles.emailText, styles.textcolorWhite]}>
-            userEmail@gmail.com
-          </Text>
+          <TouchableOpacity onPress={() => setLoginModalVisible(true)}>
+            <Text style={styles.emailText}>userEmail@gmail.com</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
           style={styles.logOutIcon}>
-          <LogOutIcon height={13} width={11} color={'white'} />
+          <LogOutIcon height={26} width={22} color={myColor.white} />
         </TouchableOpacity>
       </View>
       <View style={styles.versionContainer}>
@@ -55,13 +74,23 @@ const SettingScreen = () => {
 
       <CustomModal
         modalVisible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        overlayClose={() => setModalVisible(false)}
+        onRequestClose={() => setModalVisible(false)}
         messageText={'Are you sure want to log out?'}
         title_1={'Cancel'}
-        onPress_1={() => setModalVisible(false)}
         title_2={'Logout'}
+        btnColor={myColor.primaryColor}
+        iconBgColor={myColor.primaryColor}
         iconComponent={
-          <LogOutIcon width={52} height={44} color={myColor.secondryColor} />
+          <LogOutIcon width={52} height={44} color={myColor.white} />
         }
+      />
+      <CustomLoginAccoutModal
+        onChangeText={(value, name) => getValue(value, name)}
+        modalVisible={loginModalVisible}
+        overlayClose={() => setLoginModalVisible(false)}
+        onRequestClose={() => setLoginModalVisible(false)}
       />
     </View>
   );
@@ -92,6 +121,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     fontSize: 16,
+    fontFamily: fontFamily.SatoshiRegular,
   },
   logInContainer: {
     flexDirection: 'row',
@@ -114,6 +144,8 @@ const styles = StyleSheet.create({
   },
   emailText: {
     fontSize: 20,
+    color: myColor.white,
+    fontFamily: fontFamily.SatoshiBold,
   },
   logOutIcon: {
     height: 50,
@@ -130,7 +162,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   textcolorWhite: {
-    color: 'white',
+    color: myColor.white,
   },
   btnContainer: {
     marginHorizontal: 20,
